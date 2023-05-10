@@ -148,7 +148,7 @@
                     <td>{{ i + 1 }}</td>
                     <td><img [src]="cartItem.product.photo" class="img-thumbnail" width="150"/></td>
                     <td>
-                        <h4 class="card-title">{{ product.name }}</h4>
+                        <h4 class="card-title">{{ cartItem.product.name }}</h4>
                         <p class="card-text" 
                         [ngStyle]="{
                             'color':getDescriptionColor(cartItem.product.source),
@@ -171,7 +171,7 @@
                     <td>
                         <input type="text" size="3" maxlength="3" 
                             [value]="cartItem.requiredQuantity"/>&nbsp;
-                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-primary">Update</button>&nbsp;
                         <button class="btn btn-primary">Delete</button>
                     </td>
                 </tr>
