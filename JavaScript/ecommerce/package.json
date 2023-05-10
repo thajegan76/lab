@@ -1,0 +1,20 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "online bazzar",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "echo \"compile\" && mkdir target && cd target && cd .. && echo \"deploy\" && node --version && node index.js"
+  },
+  "keywords": [
+    "online",
+    "bazzar",
+    "ecommerce"
+  ],
+  "author": "Jegan",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
+}
