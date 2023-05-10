@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-11">
+        <input type="text" name="keyword" class="form form-control" 
+            (keyup)="doSearch($event)"/>
+    </div>
+    <div class="col-1" style="padding-bottom: 15px">
+        <button class="btn btn-success" style="float:right"
+            (click)="doChangeView()">Gallery</button>
+    </div>
+</div>
+<!--
+<ol>
+    <li *ngFor="let product of products">{{ product }}</li>
+</ol>
+-->
+<div class="row" *ngIf="isGallery">
+    <!--  12 / 3 => 4 -->
+    <div class="col-4" *ngFor="let product of products" style="padding-bottom: 15px;">
+        <div class="card">
+            <!-- 
+                In property binding the attribute is enclosed with []
+                Whatever you have on the right hand side of the equal symbol (=) 
+                will be evaluated eventhough it is inside the double quote ("")
+                Example: <input type="text" size="10" [value]="3 + 3"/>
+            -->
+            <img [src]="product.photo" class="card-img-top"/>
+            <div class="card-body">
+                <h4 class="card-title">{{ product.name }}</h4>
+                <!--
+                <p class="card-text" 
+                    [style.color]="getDescriptionColor(product.source)"
+                    [style.font-size.px]="'18'">
+                    {{ product.description }}</p>
+                -->
+                <p class="card-text" 
+                    [ngStyle]="{
+                        'color':getDescriptionColor(product.source),
+                        'font-size.px':'18'
+                    }">{{ product.description }}</p>
+                <!--
+                <h6 [class.text-primary]="product.source === 'USA'"
+                    [class.text-danger]="product.source === 'CHINA'"
+                    [class.text-success]="product.source === 'MALAYSIA'">
+                    {{ product.source }}</h6>
+                -->
+                <h6 [ngClass]="{
+                        'text-primary':product.source === 'USA',
+                        'text-danger':product.source === 'CHINA',
+                        'text-success':product.source === 'MALAYSIA'
+                    }">Source: {{ product.source }}</h6>
+                <!--
+                <h6 class="lessQuantity">Quantity: {{ product.quantity }}</h6>
+                <h6 [class]="lessQuantity">Quantity: {{ product.quantity }}</h6>
+                <h6 [class]="'lessQuantity'">Quantity: {{ product.quantity }}</h6>
+                -->
+                <!-- Apply the css class when the condition is true -->
+                <h6 [class.lessQuantity]="(product.quantity < minimumQuantity)">
+                    Quantity: {{ product.quantity }}</h6>
+                <!-- Supply different values to the css style based on some condition-->
+                <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
+                    Price: {{ product.price }}</h6>
+                <!-- <div *ngIf="product.quantity >= minimumQuantity"> -->
+                <input type="text" size="3" maxlength="3"/>&nbsp;
+                <button class="btn btn-primary" [disabled]="(product.quantity < minimumQuantity)">
+                    <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
+                </button>
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="!isGallery">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th [attr.colspan]="colspanValue">Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="product.photo" class="img-thumbnail" width="150"/></td>
+                    <td>
+                        <p class="card-text" 
+                        [ngStyle]="{
+                            'color':getDescriptionColor(product.source),
+                            'font-size.px':'18'
+                        }">{{ product.description }}</p>
+                        <h6 [ngClass]="{
+                            'text-primary':product.source === 'USA',
+                            'text-danger':product.source === 'CHINA',
+                            'text-success':product.source === 'MALAYSIA'
+                        }">Source: {{ product.source }}</h6>
+                    </td>
+                    <td>
+                        <h6 [class.lessQuantity]="(product.quantity < minimumQuantity)">
+                            Quantity: {{ product.quantity }}</h6>
+                    </td>
+                    <td>
+                        <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
+                            Price: {{ product.price }}</h6>
+                    </td>
+                    <td>
+                        <input type="text" size="3" maxlength="3"/>&nbsp;
+                        <button class="btn btn-primary" [disabled]="(product.quantity < minimumQuantity)">
+                            <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
