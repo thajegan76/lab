@@ -113,9 +113,22 @@ export class ProductsComponent {
     }
   }
 
-  public addToCart(product:Product, requiredQuantity:any) {
-    let cartItem:CartItem = new CartItem(0, product, requiredQuantity.value);
+  public addToCart(product:Product, requiredQuantity:HTMLInputElement, message:HTMLSpanElement) {
+    let cartItem:CartItem = new CartItem(0, product, +requiredQuantity.value);
     this.shoppingCart.push(cartItem);
+    requiredQuantity.value = "";
+    message.innerHTML = "Product added";
+  }
+
+  public checkQuantity(product:Product, requiredQuantity:HTMLInputElement, 
+    addButton:HTMLButtonElement, message:HTMLSpanElement) {
+      if (product.quantity < +requiredQuantity.value) {
+        addButton.disabled = true;
+        message.innerHTML = "Less Quantity";
+      } else {
+        addButton.disabled = false;
+        message.innerHTML = "";
+      }
   }
 
 }
