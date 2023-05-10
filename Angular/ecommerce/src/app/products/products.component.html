@@ -2,6 +2,9 @@
     <div class="col-11">
         <input type="text" name="keyword" class="form form-control" 
             (keyup)="doSearch($event)"/>
+        <ol>
+            <li *ngFor="let product of searchResults">{{ product.name }}</li>
+        </ol>
     </div>
     <div class="col-1" style="padding-bottom: 15px">
         <button class="btn btn-success" style="float:right"
