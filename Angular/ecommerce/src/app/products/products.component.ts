@@ -8,11 +8,7 @@ import { Product } from '../models/product';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent {
-
-  // we are creating a property lessQuantity and assign the variable with 
-  // the string literal lessQuantity
-  // public lessQuantity:string = "lessQuantity";
-  public minimumQuantity:number;
+  
   public colspanValue:number;
   public isGallery:boolean;
   public searchResults:Product[];
@@ -70,25 +66,11 @@ export class ProductsComponent {
     }
   ]
 
-  constructor() { 
-    this.minimumQuantity = 20;
+  constructor() {
     this.colspanValue = 2;
     this.isGallery = true;
     this.searchResults = [];
     this.shoppingCart = [];
-  }
-
-  public getDescriptionColor(source:string):string {
-    switch(source) {
-      case 'USA':
-        return 'blue';
-      case 'CHINA':
-        return 'red';
-      case 'MALAYSIA':
-        return 'green';
-      default:
-        return 'black';
-    }
   }
 
   public doChangeView() {
@@ -113,22 +95,8 @@ export class ProductsComponent {
     }
   }
 
-  public addToCart(product:Product, requiredQuantity:HTMLInputElement, message:HTMLSpanElement) {
-    let cartItem:CartItem = new CartItem(0, product, +requiredQuantity.value);
+  public addToCart(cartItem:CartItem) {
     this.shoppingCart.push(cartItem);
-    requiredQuantity.value = "";
-    message.innerHTML = "Product added";
-  }
-
-  public checkQuantity(product:Product, requiredQuantity:HTMLInputElement, 
-    addButton:HTMLButtonElement, message:HTMLSpanElement) {
-      if (product.quantity < +requiredQuantity.value) {
-        addButton.disabled = true;
-        message.innerHTML = "Less Quantity";
-      } else {
-        addButton.disabled = false;
-        message.innerHTML = "";
-      }
   }
 
 }

@@ -2,9 +2,13 @@
     <div class="col-10">
         <input type="text" name="keyword" class="form form-control" 
             (keyup)="doSearch($event)"/>
-        <ol>
-            <li *ngFor="let product of searchResults">{{ product.name }}</li>
-        </ol>
+        <table class="table table-bordered">
+            <tbody>
+                <tr *ngFor="let localproduct of searchResults; let i = index"
+                    class="app-product-list" [product]="localproduct" [index]="i + 1"
+                    (notify)="addToCart($event)">
+            </tbody>
+        </table>
     </div>
     <div class="col-1">
         <button type="button" class="btn btn-primary position-relative">
@@ -28,67 +32,14 @@
 -->
 <div class="row" *ngIf="isGallery">
     <!--  12 / 3 => 4 -->
-    <div class="col-4" *ngFor="let product of products" style="padding-bottom: 15px;">
-        <div class="card">
-            <!-- 
-                In property binding the attribute is enclosed with []
-                Whatever you have on the right hand side of the equal symbol (=) 
-                will be evaluated eventhough it is inside the double quote ("")
-                Example: <input type="text" size="10" [value]="3 + 3"/>
-            -->
-            <img [src]="product.photo" class="card-img-top"/>
-            <div class="card-body">
-                <h4 class="card-title">{{ product.name }}</h4>
-                <!--
-                <p class="card-text" 
-                    [style.color]="getDescriptionColor(product.source)"
-                    [style.font-size.px]="'18'">
-                    {{ product.description }}</p>
-                -->
-                <p class="card-text" 
-                    [ngStyle]="{
-                        'color':getDescriptionColor(product.source),
-                        'font-size.px':'18'
-                    }">{{ product.description }}</p>
-                <!--
-                <h6 [class.text-primary]="product.source === 'USA'"
-                    [class.text-danger]="product.source === 'CHINA'"
-                    [class.text-success]="product.source === 'MALAYSIA'">
-                    {{ product.source }}</h6>
-                -->
-                <h6 [ngClass]="{
-                        'text-primary':product.source === 'USA',
-                        'text-danger':product.source === 'CHINA',
-                        'text-success':product.source === 'MALAYSIA'
-                    }">Source: {{ product.source }}</h6>
-                <!--
-                <h6 class="lessQuantity">Quantity: {{ product.quantity }}</h6>
-                <h6 [class]="lessQuantity">Quantity: {{ product.quantity }}</h6>
-                <h6 [class]="'lessQuantity'">Quantity: {{ product.quantity }}</h6>
-                -->
-                <!-- Apply the css class when the condition is true -->
-                <h6 [class.lessQuantity]="(product.quantity < minimumQuantity)">
-                    Quantity: {{ product.quantity }}</h6>
-                <!-- Supply different values to the css style based on some condition-->
-                <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
-                    Price: {{ product.price }}</h6>
-                <!-- <div *ngIf="product.quantity >= minimumQuantity"> -->
-                <!-- 
-                    #requiredQuantity is the template referrence variable
-                    which is pointing to the entire input box
-                    if you want to pull out the value "requiredQuantity.value"
-                -->
-                <input type="text" size="3" maxlength="3" #requiredQuantity
-                    (keyup)="checkQuantity(product, requiredQuantity, addButton, message)"/>&nbsp;
-                <button class="btn btn-primary" #addButton
-                    [disabled]="(product.quantity < minimumQuantity)"
-                    (click)="addToCart(product, requiredQuantity, message)">
-                    <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
-                </button>&nbsp;
-                <span #message></span>
-                <!-- </div> -->
-            </div>
-        </div>
+    <div class="col-4" *ngFor="let localproduct of products" style="padding-bottom: 15px;">
+        <!-- 
+            parent component is sending value to the child component 
+            which means this is property binding
+            In property binding [propertyinthechildcomponent]="valueintheforloop"
+        -->
+        <app-product-gallery [product]="localproduct" (notify)="addToCart($event)">
+        </app-product-gallery>
     </div>
 </div>
 <div class="row" *ngIf="!isGallery">
@@ -104,40 +55,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td><img [src]="product.photo" class="img-thumbnail" width="150"/></td>
-                    <td>
-                        <h4 class="card-title">{{ product.name }}</h4>
-                        <p class="card-text" 
-                        [ngStyle]="{
-                            'color':getDescriptionColor(product.source),
-                            'font-size.px':'18'
-                        }">{{ product.description }}</p>
-                        <h6 [ngClass]="{
-                            'text-primary':product.source === 'USA',
-                            'text-danger':product.source === 'CHINA',
-                            'text-success':product.source === 'MALAYSIA'
-                        }">Source: {{ product.source }}</h6>
-                    </td>
-                    <td>
-                        <h6 [class.lessQuantity]="(product.quantity < minimumQuantity)">
-                            Quantity: {{ product.quantity }}</h6>
-                    </td>
-                    <td>
-                        <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
-                            Price: {{ product.price }}</h6>
-                    </td>
-                    <td>
-                        <input type="text" size="3" maxlength="3" #requiredQuantity
-                            (keyup)="checkQuantity(product, requiredQuantity, addButton, message)"/>&nbsp;
-                        <button class="btn btn-primary" #addButton
-                            [disabled]="(product.quantity < minimumQuantity)"
-                            (click)="addToCart(product, requiredQuantity, message)">
-                            <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
-                        </button>&nbsp;
-                        <span #message></span>
-                    </td>
+                <tr *ngFor="let localproduct of products; let i = index"
+                    class="app-product-list" [product]="localproduct" [index]="i + 1"
+                    (notify)="addToCart($event)">
+                    <!--
+                    <tr *ngFor="let localproduct of products; let i = index"
+                        app-product-list [product]="localproduct" [index]="i">
+                    <app-product-list [product]="localproduct" [index]="i">
+                    </app-product-list>
+                    -->
                 </tr>
             </tbody>
         </table>
@@ -151,7 +77,7 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th [attr.colspan]="colspanValue">Product</th>
+                    <th colspan="2">Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Action</th>
@@ -163,24 +89,14 @@
                     <td><img [src]="cartItem.product.photo" class="img-thumbnail" width="150"/></td>
                     <td>
                         <h4 class="card-title">{{ cartItem.product.name }}</h4>
-                        <p class="card-text" 
-                        [ngStyle]="{
-                            'color':getDescriptionColor(cartItem.product.source),
-                            'font-size.px':'18'
-                        }">{{ cartItem.product.description }}</p>
-                        <h6 [ngClass]="{
-                            'text-primary':cartItem.product.source === 'USA',
-                            'text-danger':cartItem.product.source === 'CHINA',
-                            'text-success':cartItem.product.source === 'MALAYSIA'
-                        }">Source: {{ cartItem.product.source }}</h6>
+                        <p class="card-text">{{ cartItem.product.description }}</p>
+                        <h6 class="card-title">Source: {{ cartItem.product.source }}</h6>
                     </td>
                     <td>
-                        <h6 [class.lessQuantity]="(cartItem.product.quantity < minimumQuantity)">
-                            Quantity: {{ cartItem.product.quantity }}</h6>
+                        <h6>Quantity: {{ cartItem.product.quantity }}</h6>
                     </td>
                     <td>
-                        <h6 [style.color]="(cartItem.product.price < 1000) ? 'green' : (cartItem.product.price < 3000) ? 'blue' : 'red'">
-                            Price: {{ cartItem.product.price }}</h6>
+                        <h6>Price: {{ cartItem.product.price }}</h6>
                     </td>
                     <td>
                         <input type="text" size="3" maxlength="3" 
