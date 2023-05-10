@@ -63,8 +63,15 @@
                 <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
                     Price: {{ product.price }}</h6>
                 <!-- <div *ngIf="product.quantity >= minimumQuantity"> -->
-                <input type="text" size="3" maxlength="3"/>&nbsp;
-                <button class="btn btn-primary" [disabled]="(product.quantity < minimumQuantity)">
+                <!-- 
+                    #requiredQuantity is the template referrence variable
+                    which is pointing to the entire input box
+                    if you want to pull out the value "requiredQuantity.value"
+                -->
+                <input type="text" size="3" maxlength="3" #requiredQuantity/>&nbsp;
+                <button class="btn btn-primary" 
+                    [disabled]="(product.quantity < minimumQuantity)"
+                    (click)="addToCart(product, requiredQuantity)">
                     <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
                 </button>
                 <!-- </div> -->
@@ -89,6 +96,7 @@
                     <td>{{ i + 1 }}</td>
                     <td><img [src]="product.photo" class="img-thumbnail" width="150"/></td>
                     <td>
+                        <h4 class="card-title">{{ product.name }}</h4>
                         <p class="card-text" 
                         [ngStyle]="{
                             'color':getDescriptionColor(product.source),
@@ -109,10 +117,62 @@
                             Price: {{ product.price }}</h6>
                     </td>
                     <td>
-                        <input type="text" size="3" maxlength="3"/>&nbsp;
-                        <button class="btn btn-primary" [disabled]="(product.quantity < minimumQuantity)">
+                        <input type="text" size="3" maxlength="3" #requiredQuantity/>&nbsp;
+                        <button class="btn btn-primary" 
+                            [disabled]="(product.quantity < minimumQuantity)"
+                            (click)="addToCart(product, requiredQuantity)">
                             <span [innerHtml]="(product.quantity < minimumQuantity) ? 'Out of stock' : 'Add to Cart'"></span>
                         </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h3>Shopping Cart</h3>
+<hr/>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th [attr.colspan]="colspanValue">Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cartItem of shoppingCart; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="cartItem.product.photo" class="img-thumbnail" width="150"/></td>
+                    <td>
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <p class="card-text" 
+                        [ngStyle]="{
+                            'color':getDescriptionColor(cartItem.product.source),
+                            'font-size.px':'18'
+                        }">{{ cartItem.product.description }}</p>
+                        <h6 [ngClass]="{
+                            'text-primary':cartItem.product.source === 'USA',
+                            'text-danger':cartItem.product.source === 'CHINA',
+                            'text-success':cartItem.product.source === 'MALAYSIA'
+                        }">Source: {{ cartItem.product.source }}</h6>
+                    </td>
+                    <td>
+                        <h6 [class.lessQuantity]="(cartItem.product.quantity < minimumQuantity)">
+                            Quantity: {{ cartItem.product.quantity }}</h6>
+                    </td>
+                    <td>
+                        <h6 [style.color]="(cartItem.product.price < 1000) ? 'green' : (cartItem.product.price < 3000) ? 'blue' : 'red'">
+                            Price: {{ cartItem.product.price }}</h6>
+                    </td>
+                    <td>
+                        <input type="text" size="3" maxlength="3" 
+                            [value]="cartItem.requiredQuantity"/>&nbsp;
+                        <button class="btn btn-primary">Update</button>
+                        <button class="btn btn-primary">Delete</button>
                     </td>
                 </tr>
             </tbody>

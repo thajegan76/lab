@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartItem } from '../models/cart-item';
 import { Product } from '../models/product';
 
 @Component({
@@ -15,6 +16,7 @@ export class ProductsComponent {
   public colspanValue:number;
   public isGallery:boolean;
   public searchResults:Product[];
+  public shoppingCart:CartItem[];
 
   public products:Product[] = [
     { 
@@ -73,6 +75,7 @@ export class ProductsComponent {
     this.colspanValue = 2;
     this.isGallery = true;
     this.searchResults = [];
+    this.shoppingCart = [];
   }
 
   public getDescriptionColor(source:string):string {
@@ -108,6 +111,11 @@ export class ProductsComponent {
     } else {
       this.searchResults = [];
     }
+  }
+
+  public addToCart(product:Product, requiredQuantity:any) {
+    let cartItem:CartItem = new CartItem(0, product, requiredQuantity.value);
+    this.shoppingCart.push(cartItem);
   }
 
 }
