@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { CartItem } from '../models/cart-item';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
+import { ShoppingCartService } from '../services/shopping-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -20,23 +21,33 @@ export class ProductsComponent implements OnInit, OnDestroy {
   public productService:ProductService;
   public productService$?:Subscription;
 
-  constructor(productService:ProductService) {
+  public shoppingCartService:ShoppingCartService;
+  public shoppingCartService$?:Subscription;
+  public saveShoppingCartService$?:Subscription;
+
+  constructor(productService:ProductService, shoppingCartService:ShoppingCartService) {
     this.colspanValue = 2;
     this.isGallery = true;
     this.products = [];
     this.searchResults = [];
     this.shoppingCart = [];
     this.productService = productService;
+    this.shoppingCartService = shoppingCartService;
   }
 
   ngOnInit(): void {
     this.productService$ = this.productService.findAll().subscribe((products:Product[]) => {
       this.products = products;
     })
+    this.shoppingCartService$ = this.shoppingCartService.findAll().subscribe((shoppingCart:CartItem[]) => {
+      this.shoppingCart = shoppingCart;
+    })
   }
 
   ngOnDestroy(): void {
     this.productService$?.unsubscribe();
+    this.shoppingCartService$?.unsubscribe();
+    this.saveShoppingCartService$?.unsubscribe();
   }
 
   public doChangeView() {
@@ -62,7 +73,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   public addToCart(cartItem:CartItem) {
-    this.shoppingCart.push(cartItem);
+    this.saveShoppingCartService$ = 
+      this.shoppingCartService.save(cartItem).subscribe((newCartItem:CartItem) => {
+        this.shoppingCart.push(cartItem);
+      })
   }
 
 }
