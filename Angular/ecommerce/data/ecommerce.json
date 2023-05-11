@@ -68,6 +68,19 @@
         "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm-l_opo8bUdFghLttcXnKFhMuB7ippPSkJi0OTZa0h8RBEgjnYue29TaGh9xsCE9E6DE&usqp=CAU"
       },
       "requiredQuantity": 1
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": 3,
+        "name": "Computer",
+        "description": "To play games",
+        "source": "MALAYSIA",
+        "quantity": 32,
+        "price": 3578.65,
+        "photo": "https://qph.cf2.quoracdn.net/main-qimg-022f1381262571d075a017094d5ccb52-lq"
+      },
+      "requiredQuantity": 1
     }
   ],
   "users": []

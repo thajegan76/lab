@@ -25,4 +25,12 @@ export class ShoppingCartService {
     return this.httpClient.post<CartItem>(this.API_ENDPOINT, cartItem);
   }
 
+  public update(cartItem:CartItem):Observable<CartItem> {
+    return this.httpClient.put<CartItem>(this.API_ENDPOINT + "/" + cartItem.id, cartItem);
+  }
+
+  public delete(id:number):Observable<CartItem> {
+    return this.httpClient.delete<CartItem>(this.API_ENDPOINT + "/" + id);
+  }
+
 }

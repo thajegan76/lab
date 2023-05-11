@@ -1,5 +1,6 @@
 <div class="row">
     <div class="col-12">
+        <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -26,10 +27,13 @@
                         <h6>Price: {{ cartItem.product.price }}</h6>
                     </td>
                     <td>
-                        <input type="text" size="3" maxlength="3" 
+                        <input type="text" size="3" maxlength="3" #requiredQuantity
                             [value]="cartItem.requiredQuantity"/>&nbsp;
-                        <button class="btn btn-primary">Update</button>&nbsp;
-                        <button class="btn btn-danger">Delete</button>
+                        <button class="btn btn-primary" 
+                            (click)="update(cartItem, +requiredQuantity.value)">
+                            Update</button>&nbsp;
+                        <button class="btn btn-danger"
+                            (click)="delete(cartItem)">Delete</button>
                     </td>
                 </tr>
             </tbody>
