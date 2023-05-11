@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { approutes } from './router.config';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
@@ -37,7 +38,8 @@ import { MenuComponent } from './menu/menu.component';
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(approutes)
+    RouterModule.forRoot(approutes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
