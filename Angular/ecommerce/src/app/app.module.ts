@@ -1,6 +1,14 @@
+/* 
+  By default every angular application will have 2 modules
+  NgModule and BrowserModule
+  Whenever we add new modules like FormsModule, RouterModule
+  please make sure you add an entry inside the imports array
+*/
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { approutes } from './router.config';
 
 import { AppComponent } from './app.component';
 import { PageHeaderComponent } from './page-header/page-header.component';
@@ -9,6 +17,9 @@ import { ProductsComponent } from './products/products.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { LoginComponent } from './login/login.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +29,15 @@ import { ProductListComponent } from './product-list/product-list.component';
     ProductsComponent,
     RegistrationComponent,
     ProductGalleryComponent,
-    ProductListComponent
+    ProductListComponent,
+    ShoppingCartComponent,
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(approutes)
   ],
   providers: [],
   bootstrap: [AppComponent]
