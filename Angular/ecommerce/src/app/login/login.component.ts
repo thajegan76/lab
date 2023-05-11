@@ -22,12 +22,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginService.loggedInSource.subscribe((loginResponse:LoginResponse) => {
+      this.loginResponse = loginResponse;
+    })
   }
 
   doLogin() {
     this.loginService.doLogin(this.credentials).subscribe({
       next: (loginResponse:LoginResponse) => {
-        this.loginResponse = loginResponse;
+        this.loginService.loggedInStore = loginResponse;
       },
       error: (error:any) => {
         this.message = error.error;
@@ -37,7 +40,7 @@ export class LoginComponent implements OnInit {
 
   doLogout() {
     this.credentials = new Credentials("", "");
-    this.loginResponse = undefined;
+    this.loginService.doLogout();
   }
 
 }
