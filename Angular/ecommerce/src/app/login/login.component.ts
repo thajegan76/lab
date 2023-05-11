@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Credentials } from '../models/credentials';
+import { LoginResponse } from '../models/login-response';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class LoginComponent implements OnInit {
   public message:string;
   public credentials:Credentials;
   public loginService:LoginService;
+  public loginResponse?:LoginResponse;
 
   constructor(loginService:LoginService) { 
     this.message = "";
@@ -24,13 +26,18 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     this.loginService.doLogin(this.credentials).subscribe({
-      next: (data:any) => {
-        console.log(data);
+      next: (loginResponse:LoginResponse) => {
+        this.loginResponse = loginResponse;
       },
       error: (error:any) => {
         this.message = error.error;
       }
     })
+  }
+
+  doLogout() {
+    this.credentials = new Credentials("", "");
+    this.loginResponse = undefined;
   }
 
 }

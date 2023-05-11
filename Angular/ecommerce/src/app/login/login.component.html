@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!loginResponse">
     <div class="card-header">
         <h3 class="card-title">Login</h3>
     </div>
@@ -16,6 +16,33 @@
         </div>
         <div class="mb-3">
             <button class="btn btn-primary" (click)="doLogin()">Login !!!</button>
+        </div>
+    </div>
+</div>
+<div class="card" *ngIf="loginResponse">
+    <div class="card-header">
+        <h3 class="card-title">Dashboard</h3>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
+        <div class="mb-3">
+            <label for="email" class="form-label">First Name: </label>&nbsp;
+            <label for="email" class="form-label">{{ loginResponse.user.firstName }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Last Name: </label>&nbsp;
+            <label for="email" class="form-label">{{ loginResponse.user.lastName }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address: </label>&nbsp;
+            <label for="email" class="form-label">{{ loginResponse.user.email }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">JWT Token: </label>&nbsp;
+            <label for="email" class="form-label">{{ loginResponse.accessToken }}</label>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" (click)="doLogout()">Logout !!!</button>
         </div>
     </div>
 </div>
