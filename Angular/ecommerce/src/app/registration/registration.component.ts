@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,9 +10,11 @@ import { User } from '../models/user';
 export class RegistrationComponent implements OnInit {
 
   public user!:User;
+  public userService:UserService;
   public isRegistration!:boolean;
 
-  constructor() { 
+  constructor(userService:UserService) { 
+    this.userService = userService;
     this.doHome();
   }
 
@@ -19,7 +22,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   doRegister() {
-    this.isRegistration = false;
+    this.userService.save(this.user).subscribe((user:User) => {
+      this.isRegistration = false;
+    })
   }
 
   doHome() {

@@ -83,5 +83,13 @@
       "requiredQuantity": 1
     }
   ],
-  "users": []
+  "users": [
+    {
+      "email": "jegan@gmail.com",
+      "password": "$2a$10$vHYShmYYEYxiZQNe0IHkr.J/H4O6374tjaoDajPufC.rzP0dBEa9W",
+      "id": 1,
+      "firstName": "Thayanithy",
+      "lastName": "Jegan"
+    }
+  ]
 }
