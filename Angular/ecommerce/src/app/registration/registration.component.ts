@@ -12,9 +12,11 @@ export class RegistrationComponent implements OnInit {
   public user!:User;
   public userService:UserService;
   public isRegistration!:boolean;
+  public message:string;
 
   constructor(userService:UserService) { 
     this.userService = userService;
+    this.message = "";
     this.doHome();
   }
 
@@ -22,8 +24,13 @@ export class RegistrationComponent implements OnInit {
   }
 
   doRegister() {
-    this.userService.save(this.user).subscribe((user:User) => {
-      this.isRegistration = false;
+    this.userService.save(this.user).subscribe({
+      next: (user:User) => {
+        this.isRegistration = false;
+      },
+      error: (error:any) => {
+        this.message = error.error;
+      }
     })
   }
 
