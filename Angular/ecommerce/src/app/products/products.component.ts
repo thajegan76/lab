@@ -36,9 +36,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.productService$ = this.productService.findAll().subscribe((products:Product[]) => {
-      this.products = products;
-    })
+    if (localStorage.getItem("products")) {
+      let strproducts:string | null = localStorage.getItem("products");
+      if (strproducts !== null) this.products = JSON.parse(strproducts);
+    } else {
+      this.productService$ = this.productService.findAll().subscribe((products:Product[]) => {
+        this.products = products;
+        localStorage.setItem("products", JSON.stringify(this.products));
+      })
+    }
     this.shoppingCartService$ = this.shoppingCartService.findAll().subscribe((shoppingCart:CartItem[]) => {
       this.shoppingCart = shoppingCart;
     })
