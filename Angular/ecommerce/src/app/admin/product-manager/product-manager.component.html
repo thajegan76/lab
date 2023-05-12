@@ -1,4 +1,11 @@
 <div class="row">
+    <div class="col-11"><h5 class="card-title">Product Management</h5></div>
+    <div class="col-1" style="padding-bottom: 15px">
+        <button class="btn btn-success" style="float:right"
+            routerLink="/admin/newproduct">New</button>
+    </div>
+</div>
+<div class="row">
     <div class="col-12">
         <table class="table table-bordered">
             <thead>
@@ -22,7 +29,9 @@
                     <td><h6>Quantity: {{ product.quantity }}</h6></td>
                     <td><h6>Price: {{ product.price }}</h6></td>
                     <td>
-                        <button class="btn btn-primary">Update</button>&nbsp;
+                        <button class="btn btn-primary"
+                            [routerLink]="['/admin/editproduct', product.id]">
+                            Edit</button>&nbsp;
                         <button class="btn btn-danger">Delete</button>
                     </td>
                 </tr>

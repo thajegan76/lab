@@ -6,12 +6,16 @@ import { approutes } from './router.config';
 import { ProductManagerComponent } from './product-manager/product-manager.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
 import { MenuComponent } from './menu/menu.component';
+import { NewProductComponent } from './new-product/new-product.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
     ProductManagerComponent,
     UserManagerComponent,
-    MenuComponent
+    MenuComponent,
+    NewProductComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,
