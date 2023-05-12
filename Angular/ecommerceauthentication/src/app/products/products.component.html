@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-10">
+        <input type="text" name="keyword" class="form form-control" 
+            (keyup)="doSearch($event)"/>
+        <table class="table table-bordered">
+            <tbody>
+                <tr *ngFor="let localproduct of searchResults; let i = index"
+                    class="app-product-list" [product]="localproduct" [index]="i + 1"
+                    (notify)="addToCart($event)">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1">
+        <button type="button" class="btn btn-primary position-relative">
+            Cart
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ shoppingCart.length }}
+            </span>
+        </button>
+    </div>
+    <div class="col-1" style="padding-bottom: 15px">
+        <button class="btn btn-success" style="float:right"
+            (click)="doChangeView()">
+            <span [innerHTML]="(isGallery) ? 'List' : 'Gallery'"></span>
+        </button>
+    </div>
+</div>
+<!--
+<ol>
+    <li *ngFor="let product of products">{{ product }}</li>
+</ol>
+-->
+<div class="row" *ngIf="isGallery">
+    <!--  12 / 3 => 4 -->
+    <div class="col-4" *ngFor="let localproduct of products" style="padding-bottom: 15px;">
+        <!-- 
+            parent component is sending value to the child component 
+            which means this is property binding
+            In property binding [propertyinthechildcomponent]="valueintheforloop"
+        -->
+        <app-product-gallery [product]="localproduct" (notify)="addToCart($event)">
+        </app-product-gallery>
+    </div>
+</div>
+<div class="row" *ngIf="!isGallery">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th [attr.colspan]="colspanValue">Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let localproduct of products; let i = index"
+                    class="app-product-list" [product]="localproduct" [index]="i + 1"
+                    (notify)="addToCart($event)">
+                    <!--
+                    <tr *ngFor="let localproduct of products; let i = index"
+                        app-product-list [product]="localproduct" [index]="i">
+                    <app-product-list [product]="localproduct" [index]="i">
+                    </app-product-list>
+                    -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

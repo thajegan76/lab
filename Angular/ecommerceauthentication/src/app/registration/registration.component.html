@@ -1,0 +1,68 @@
+<div class="card" *ngIf="isRegistration">
+    <div class="card-header">
+        <h3 class="card-title">Registration</h3>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" 
+                [(ngModel)]="user.firstName" placeholder="First Name">
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" 
+                [(ngModel)]="user.lastName" placeholder="Last Name">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" 
+                [(ngModel)]="user.email" placeholder="Email Address">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password"
+                [(ngModel)]="user.password">
+        </div>
+        <div class="mb-3">
+            <!-- 
+                Using event binding we have to create template referrence variable
+                for every field and then pass all the template referrence variables to 
+                the doRegister method
+                In 2 way data binding you no need to do that. You can bind the properties
+                inside the component directly to the form elements. So when user type 
+                something inside text bos the property inside component is updated
+                The 2 way data binding use a special Attribute Directive called ngModel
+                Only this special attribute directive is enclosed between [()]
+            -->
+            <button class="btn btn-primary" (click)="doRegister()">Register me !!!</button>
+        </div>
+    </div>
+</div>
+<div class="card" *ngIf="!isRegistration">
+    <div class="card-header">
+        <h3 class="card-title">Registration - Success</h3>
+        <h6 class="card-text">Thank you for registering with us</h6>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name: </label>&nbsp;
+            <label for="firstName" class="form-label">{{ user.firstName }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name: </label>&nbsp;
+            <label for="lastName" class="form-label">{{ user.lastName }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address: </label>&nbsp;
+            <label for="email" class="form-label">{{ user.email }}</label>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password: </label>&nbsp;
+            <label for="password" class="form-label">{{ user.password }}</label>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" (click)="doHome()"><< Back</button>
+        </div>
+    </div>
+</div>
