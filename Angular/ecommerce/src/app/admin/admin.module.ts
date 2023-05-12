@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { approutes } from './router.config';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductManagerComponent } from './product-manager/product-manager.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
@@ -19,7 +20,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(approutes)
+    RouterModule.forChild(approutes),
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
