@@ -9,12 +9,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { approutes } from './router.config';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { CatalogModule } from './catalog/catalog.module';
 
 import { AppComponent } from './app.component';
+import { JwtInterceptorService } from './services/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { AppComponent } from './app.component';
     SharedModule,
     CatalogModule
   ],
-  providers: [],
+  providers: [
+    { provide:HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi:true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
