@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-new-product',
@@ -13,11 +14,13 @@ export class NewProductComponent implements OnInit {
   public product:Product;
   public productForm:FormGroup;
   private router:Router;
+  private productService:ProductService;
 
-  constructor(router:Router) { 
+  constructor(productService:ProductService, router:Router) { 
+    this.productService = productService;
+    this.router = router;
     this.product = new Product(0, "", "", "", 0, 0, "");
     this.productForm = this.createForm();
-    this.router = router;
   }
 
   ngOnInit(): void {
@@ -36,7 +39,10 @@ export class NewProductComponent implements OnInit {
   }
 
   public save() {
-
+    let product:Product = this.productForm.value;
+    this.productService.save(product).subscribe(() => {
+      this.router.navigate(['/admin/productmanager']);
+    })
   }
 
   public goBack() {

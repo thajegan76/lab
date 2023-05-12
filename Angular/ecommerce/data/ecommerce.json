@@ -53,6 +53,15 @@
       "quantity": 48,
       "price": 472.65,
       "photo": "https://cdn.britannica.com/63/82563-050-3FCFC72A/Family-country-road.jpg?w=400&h=300&c=crop"
+    },
+    {
+      "name": "Dummy",
+      "description": "Dummy",
+      "source": "CHINA",
+      "quantity": "25",
+      "price": "110",
+      "photo": "https://secure.img1-cg.wfcdn.com/im/57072186/compr-r85/8377/83778470/dummy-general-disneypixar-toy-story-4-cardboard-standup.jpg",
+      "id": 7
     }
   ],
   "shoppingcart": [

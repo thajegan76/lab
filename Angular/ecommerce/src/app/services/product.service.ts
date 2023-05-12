@@ -19,4 +19,16 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.API_ENDPOINT);
   }
 
+  public save(product:Product):Observable<Product> {
+    return this.httpClient.post<Product>(this.API_ENDPOINT, product);
+  }
+
+  public update(product:Product):Observable<Product> {
+    return this.httpClient.put<Product>(this.API_ENDPOINT + "/" + product.id, product);
+  }
+
+  public delete(id:number):Observable<Product> {
+    return this.httpClient.delete<Product>(this.API_ENDPOINT + "/" + id);
+  }
+
 }
