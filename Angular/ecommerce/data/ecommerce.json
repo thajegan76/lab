@@ -77,6 +77,13 @@
       "id": 1,
       "firstName": "Thayanithy",
       "lastName": "Jegan"
+    },
+    {
+      "email": "peter@gmail.com",
+      "password": "$2a$10$zgjSw5LlhciYd8SQy.cmne2Lwq3LCtOo76yWg5X760IsiVkCwO8pK",
+      "id": 2,
+      "firstName": "Peter",
+      "lastName": "Parker"
     }
   ]
 }

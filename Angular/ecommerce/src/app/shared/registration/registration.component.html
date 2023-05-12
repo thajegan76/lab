@@ -3,40 +3,87 @@
         <h3 class="card-title">Registration</h3>
     </div>
     <div class="card-body">
-        <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
-        <div class="mb-3">
-            <label for="firstName" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="firstName" name="firstName" 
-                [(ngModel)]="user.firstName" placeholder="First Name">
-        </div>
-        <div class="mb-3">
-            <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" name="lastName" 
-                [(ngModel)]="user.lastName" placeholder="Last Name">
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" name="email" 
-                [(ngModel)]="user.email" placeholder="Email Address">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password"
-                [(ngModel)]="user.password">
-        </div>
-        <div class="mb-3">
-            <!-- 
-                Using event binding we have to create template referrence variable
-                for every field and then pass all the template referrence variables to 
-                the doRegister method
-                In 2 way data binding you no need to do that. You can bind the properties
-                inside the component directly to the form elements. So when user type 
-                something inside text bos the property inside component is updated
-                The 2 way data binding use a special Attribute Directive called ngModel
-                Only this special attribute directive is enclosed between [()]
-            -->
-            <button class="btn btn-primary" (click)="doRegister()">Register me !!!</button>
-        </div>
+        <form name="registration" #registrationForm=ngForm
+            (ngSubmit)="registrationForm.form.valid && doRegister()">
+            <div class="alert alert-danger" *ngIf="message">{{ message }}</div>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <!--
+                    angular maintains 6 different states
+                    ng-touched, ng-untouched, ng-pristine, ng-dirty, ng-valid, ng-invalid
+                -->
+                <input type="text" class="form-control" id="firstName" name="firstName" 
+                    [(ngModel)]="user.firstName" placeholder="First Name" 
+                    #trfirstname=ngModel required minlength="3" maxlength="60">
+                <div class="alert alert-danger" [hidden]="trfirstname.valid || trfirstname.pristine">
+                    <div *ngIf="trfirstname.errors && trfirstname.errors['required']">
+                        First Name is Required</div>
+                    <div *ngIf="trfirstname.errors && trfirstname.errors['minlength']">
+                        First Name must be atleast 3 characters</div>
+                    <div *ngIf="trfirstname.errors && trfirstname.errors['maxlength']">
+                        First Name cannot be more than 60 characters</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" 
+                    [(ngModel)]="user.lastName" placeholder="Last Name"
+                    #trlastname=ngModel required minlength="3" maxlength="60">
+                <div class="alert alert-danger" [hidden]="trlastname.valid || trlastname.pristine">
+                    <div *ngIf="trlastname.errors && trlastname.errors['required']">
+                        Last Name is Required</div>
+                    <div *ngIf="trlastname.errors && trlastname.errors['minlength']">
+                        Last Name must be atleast 3 characters</div>
+                    <div *ngIf="trlastname.errors && trlastname.errors['maxlength']">
+                        Last Name cannot be more than 60 characters</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" 
+                    [(ngModel)]="user.email" placeholder="Email Address"
+                    #tremail=ngModel required minlength="3" maxlength="120" 
+                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$">
+                <div class="alert alert-danger" [hidden]="tremail.valid || tremail.pristine">
+                    <div *ngIf="tremail.errors && tremail.errors['required']">
+                        Email is Required</div>
+                    <div *ngIf="tremail.errors && tremail.errors['minlength']">
+                        Email must be atleast 3 characters</div>
+                    <div *ngIf="tremail.errors && tremail.errors['maxlength']">
+                        Email cannot be more than 120 characters</div>
+                    <div *ngIf="tremail.errors && tremail.errors['pattern']">
+                        Email not valid</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password"
+                    [(ngModel)]="user.password" placeholder="Password"
+                    #trpassword=ngModel required minlength="3" maxlength="60" >
+                <div class="alert alert-danger" [hidden]="trpassword.valid || trpassword.pristine">
+                    <div *ngIf="trpassword.errors && trpassword.errors['required']">
+                        Password is Required</div>
+                    <div *ngIf="trpassword.errors && trpassword.errors['minlength']">
+                        Password must be atleast 3 characters</div>
+                    <div *ngIf="trpassword.errors && trpassword.errors['maxlength']">
+                        Password cannot be more than 60 characters</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <!-- 
+                    Using event binding we have to create template referrence variable
+                    for every field and then pass all the template referrence variables to 
+                    the doRegister method
+                    In 2 way data binding you no need to do that. You can bind the properties
+                    inside the component directly to the form elements. So when user type 
+                    something inside text bos the property inside component is updated
+                    The 2 way data binding use a special Attribute Directive called ngModel
+                    Only this special attribute directive is enclosed between [()]
+                -->
+                <button class="btn btn-primary" type="submit"
+                    [disabled]="!registrationForm.form.valid">Register me !!!</button>
+            </div>
+        </form>
     </div>
 </div>
 <div class="card" *ngIf="!isRegistration">

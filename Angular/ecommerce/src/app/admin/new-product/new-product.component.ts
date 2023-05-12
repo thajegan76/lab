@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -30,12 +30,32 @@ export class NewProductComponent implements OnInit {
 
   createForm():FormGroup {
     let productForm:FormGroup = new FormGroup({
-      name: new FormControl(this.product.name),
-      description: new FormControl(this.product.description),
+      name: new FormControl(this.product.name, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(60)
+      ]),
+      description: new FormControl(this.product.description, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(250)
+      ]),
       source: new FormControl(this.product.source),
-      quantity: new FormControl(this.product.quantity),
-      price: new FormControl(this.product.price),
-      photo: new FormControl(this.product.photo)
+      quantity: new FormControl(this.product.quantity, [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(1000)
+      ]),
+      price: new FormControl(this.product.price, [
+        Validators.required,
+        Validators.min(3),
+        Validators.max(10000)
+      ]),
+      photo: new FormControl(this.product.photo, [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(250)
+      ])
     })
     return productForm
   }
