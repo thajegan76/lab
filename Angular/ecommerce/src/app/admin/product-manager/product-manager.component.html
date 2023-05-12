@@ -1,1 +1,32 @@
-<p>product-manager works!</p>
+<div class="row">
+    <div class="col-12">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th colspan="2">Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td><img [src]="product.photo" class="img-thumbnail" width="150"/></td>
+                    <td>
+                        <h4 class="card-title">{{ product.name }}</h4>
+                        <p class="card-text">{{ product.description }}</p>
+                        <h6>Source: {{ product.source }}</h6>
+                    </td>
+                    <td><h6>Quantity: {{ product.quantity }}</h6></td>
+                    <td><h6>Price: {{ product.price }}</h6></td>
+                    <td>
+                        <button class="btn btn-primary">Update</button>&nbsp;
+                        <button class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
