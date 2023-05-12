@@ -5,9 +5,24 @@ import { RegistrationComponent } from './shared/registration/registration.compon
 import { LoginComponent } from './shared/login/login.component';
 
 export const approutes:Routes = [
-    { path:'home', component:ProductsComponent, pathMatch:'full' },
+    { path:'home', component: ProductsComponent, pathMatch:'full' },
     { path:'shoppingcart', component: ShoppingCartComponent, pathMatch:'full' },
-    { path:'registration', component:RegistrationComponent, pathMatch:'full' },
-    { path:'login', component:LoginComponent, pathMatch:'full' },
-    { path:'', redirectTo:'home', pathMatch:'full' }
+    { path:'registration', component: RegistrationComponent, pathMatch:'full' },
+    { path:'login', component: LoginComponent, pathMatch:'full' },
+    { path:'admin', loadChildren: () => import('./admin/admin.module').then((module) => module.AdminModule) },
+    { path:'', redirectTo: 'home', pathMatch:'full' }
 ]
+
+/*
+let loadChildren = () => {
+    return import('./admin/admin.module').then((module) => {
+        return module.AdminModule;
+    })
+}
+
+let loadChildren = () => {
+    return import('./admin/admin.module').then((module) => module.AdminModule)
+}
+
+let loadChildren = () => import('./admin/admin.module').then((module) => module.AdminModule)
+*/
