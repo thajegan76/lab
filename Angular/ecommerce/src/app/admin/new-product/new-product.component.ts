@@ -15,12 +15,14 @@ export class NewProductComponent implements OnInit {
   public productForm:FormGroup;
   private router:Router;
   private productService:ProductService;
+  public sources:string[];
 
   constructor(productService:ProductService, router:Router) { 
     this.productService = productService;
     this.router = router;
     this.product = new Product(0, "", "", "", 0, 0, "");
     this.productForm = this.createForm();
+    this.sources = ["MALAYSIA", "USA", "CHINA"];
   }
 
   ngOnInit(): void {

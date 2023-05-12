@@ -16,8 +16,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="source" class="form-label">Source</label>
-                        <input type="text" class="form-control" id="source" name="source" 
-                            formControlName="source" placeholder="Source">
+                        <select type="text" class="form-control" id="source" name="source" 
+                            formControlName="source">
+                            <option [ngValue]="localsource" *ngFor="let localsource of sources">
+                                {{ localsource }}</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Quantity</label>

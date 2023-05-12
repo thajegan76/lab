@@ -18,7 +18,7 @@ export class ProductManagerComponent implements OnInit {
   constructor(productService:ProductService) { 
     this.products = [];
     this.productService = productService;
-    this.message = "";
+    this.message = "";    
   }
 
   ngOnInit(): void {
