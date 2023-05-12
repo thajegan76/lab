@@ -5,11 +5,13 @@ import { approutes } from './router.config';
 
 import { ProductManagerComponent } from './product-manager/product-manager.component';
 import { UserManagerComponent } from './user-manager/user-manager.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     ProductManagerComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
