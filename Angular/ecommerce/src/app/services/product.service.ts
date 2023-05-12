@@ -19,6 +19,10 @@ export class ProductService {
     return this.httpClient.get<Product[]>(this.API_ENDPOINT);
   }
 
+  public findById(id:number):Observable<Product> {
+    return this.httpClient.get<Product>(this.API_ENDPOINT + "/" + id);
+  }
+
   public save(product:Product):Observable<Product> {
     return this.httpClient.post<Product>(this.API_ENDPOINT, product);
   }
