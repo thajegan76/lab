@@ -8,6 +8,8 @@ import { PageFooterComponent } from './page-footer/page-footer.component';
 import { MenuComponent } from './menu/menu.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { GreetingPipePipe } from './greeting-pipe.pipe';
+import { GreetingComponent } from './greeting/greeting.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { LoginComponent } from './login/login.component';
     PageFooterComponent,
     MenuComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    GreetingPipePipe,
+    GreetingComponent
   ],
   imports: [
     CommonModule,

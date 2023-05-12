@@ -7,7 +7,7 @@
     -->
     <img [src]="product.photo" class="card-img-top"/>
     <div class="card-body">
-        <h4 class="card-title">{{ product.name }}</h4>
+        <h4 class="card-title">{{ product.name | uppercase }}</h4>
         <!--
         <p class="card-text" 
             [style.color]="getDescriptionColor(product.source)"
@@ -40,7 +40,7 @@
             Quantity: {{ product.quantity }}</h6>
         <!-- Supply different values to the css style based on some condition-->
         <h6 [style.color]="(product.price < 1000) ? 'green' : (product.price < 3000) ? 'blue' : 'red'">
-            Price: {{ product.price }}</h6>
+            Price: {{ product.price | currency:"RM" }}</h6>
         <!-- <div *ngIf="product.quantity >= minimumQuantity"> -->
         <!-- 
             #requiredQuantity is the template referrence variable
