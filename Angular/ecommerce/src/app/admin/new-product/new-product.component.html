@@ -8,11 +8,35 @@
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name" 
                             formControlName="name" placeholder="Product Name">
+                        <div *ngIf="name && name.invalid && (name.dirty || name.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="name && name.errors && name.errors['required']">
+                                Name is required
+                            </div>
+                            <div *ngIf="name && name.errors && name.errors['minlength']">
+                                Name must be atleast 3 characters
+                            </div>
+                            <div *ngIf="name && name.errors && name.errors['maxlength']">
+                                Name cannot be more than 60 characters
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
                         <input type="text" class="form-control" id="description" name="description" 
                             formControlName="description" placeholder="Description">
+                        <div *ngIf="description && description.invalid && (description.dirty || description.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="description && description.errors && description.errors['required']">
+                                Description is required
+                            </div>
+                            <div *ngIf="description && description.errors && description.errors['minlength']">
+                                Description must be atleast 3 characters
+                            </div>
+                            <div *ngIf="description && description.errors && description.errors['maxlength']">
+                                Description cannot be more than 250 characters
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="source" class="form-label">Source</label>
@@ -26,19 +50,56 @@
                         <label for="quantity" class="form-label">Quantity</label>
                         <input type="text" class="form-control" id="quantity" name="quantity" 
                             formControlName="quantity" placeholder="Quantity">
+                        <div *ngIf="quantity && quantity.invalid && (quantity.dirty || quantity.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="quantity && quantity.errors && quantity.errors['required']">
+                                Quantity is required
+                            </div>
+                            <div *ngIf="quantity && quantity.errors && quantity.errors['min']">
+                                Quantity must be atleast 3
+                            </div>
+                            <div *ngIf="quantity && quantity.errors && quantity.errors['max']">
+                                Name cannot be more than 1000
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="text" class="form-control" id="price" name="price" 
                             formControlName="price" placeholder="Price">
+                        <div *ngIf="price && price.invalid && (price.dirty || price.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="price && price.errors && price.errors['required']">
+                                Price is required
+                            </div>
+                            <div *ngIf="price && price.errors && price.errors['min']">
+                                Price must be atleast 3
+                            </div>
+                            <div *ngIf="price && price.errors && price.errors['max']">
+                                Price cannot be more than 10000
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="photo" class="form-label">Photo</label>
                         <input type="text" class="form-control" id="photo" name="photo" 
                             formControlName="photo" placeholder="Photo">
+                        <div *ngIf="photo && photo.invalid && (photo.dirty || photo.touched)"
+                                class="alert alert-danger">
+                            <div *ngIf="photo && photo.errors && photo.errors['required']">
+                                Photo is required
+                            </div>
+                            <div *ngIf="photo && photo.errors && photo.errors['minlength']">
+                                Photo must be atleast 3 characters
+                            </div>
+                            <div *ngIf="photo && photo.errors && photo.errors['maxlength']">
+                                Photo cannot be more than 250 characters
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <button class="btn btn-success" type="submit">Save</button>&nbsp;
+                        <button class="btn btn-success" type="submit"
+                            [disabled]="!productForm.valid">Save</button>&nbsp;
                         <button class="btn btn-secondary" (click)="goBack()"><< Back</button>
                     </div>
                 </form>

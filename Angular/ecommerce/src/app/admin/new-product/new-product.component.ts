@@ -71,4 +71,28 @@ export class NewProductComponent implements OnInit {
     this.router.navigate(['/admin/productmanager']);
   }
 
+  get name() {
+    return this.productForm.get('name');
+  }
+
+  get description() {
+    return this.productForm.get('description');
+  }
+
+  get source() {
+    return this.productForm.get('source');
+  }
+
+  get quantity() {
+    return this.productForm.get('quantity');
+  }
+
+  get price() {
+    return this.productForm.get('price');
+  }
+
+  get photo() {
+    return this.productForm.get('photo');
+  }
+
 }
