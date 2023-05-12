@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './shared/login/login.component';
 import { ProductsComponent } from './products/products.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './shared/registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 export const approutes:Routes = [
