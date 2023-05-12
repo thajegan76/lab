@@ -12,27 +12,21 @@ import { approutes } from './router.config';
 import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
+import { CatalogModule } from './catalog/catalog.module';
 
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductGalleryComponent } from './product-gallery/product-gallery.component';
-import { ProductListComponent } from './product-list/product-list.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ProductsComponent,
-    ProductGalleryComponent,
-    ProductListComponent,
-    ShoppingCartComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(approutes),
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    CatalogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './shared/login/login.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './catalog/products/products.component';
+import { ShoppingCartComponent } from './catalog/shopping-cart/shopping-cart.component';
 import { RegistrationComponent } from './shared/registration/registration.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { LoginComponent } from './shared/login/login.component';
 
 export const approutes:Routes = [
     { path:'home', component:ProductsComponent, pathMatch:'full' },

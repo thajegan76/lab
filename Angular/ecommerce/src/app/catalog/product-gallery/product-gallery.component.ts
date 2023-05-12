@@ -1,29 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CartItem } from '../models/cart-item';
-import { Product } from '../models/product';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CartItem } from '../../models/cart-item';
+import { Product } from '../../models/product';
 
 @Component({
-  // html tag component
-  // selector: 'app-product-list',
-  // html attribute component
-  // selector: '[app-product-list]',
-  // html class component
-  selector: '.app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  selector: 'app-product-gallery',
+  templateUrl: './product-gallery.component.html',
+  styleUrls: ['./product-gallery.component.css']
 })
-export class ProductListComponent implements OnInit {
+export class ProductGalleryComponent implements OnInit {
+
+  public minimumQuantity:number;
 
   @Input()
   public product?:Product;
 
-  @Input()
-  public index?:number;
-
+  // property decorator (it inject getter and setter method for notify property)
   @Output() 
   public notify:EventEmitter<CartItem>;
-
-  public minimumQuantity:number;
 
   constructor() { 
     this.minimumQuantity = 20;
