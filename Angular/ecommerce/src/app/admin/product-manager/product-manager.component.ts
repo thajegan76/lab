@@ -13,10 +13,12 @@ export class ProductManagerComponent implements OnInit {
   public products:Product[];
   public productService:ProductService;
   public productService$?:Subscription;
+  public message:string;
 
   constructor(productService:ProductService) { 
     this.products = [];
     this.productService = productService;
+    this.message = "";
   }
 
   ngOnInit(): void {
@@ -29,4 +31,14 @@ export class ProductManagerComponent implements OnInit {
   ngOnDestroy(): void {
     this.productService$?.unsubscribe();
   }
+
+  doDelete(product:Product) {
+    this.productService.delete(product.id).subscribe(() => {
+      this.productService.findAll().subscribe((products:Product[]) => {
+        this.products = products;
+        this.message = "Product successfully deleted";
+      })      
+    })
+  }
+
 }

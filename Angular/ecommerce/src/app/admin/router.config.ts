@@ -13,6 +13,8 @@ export const approutes:Routes = [
     { path:"menu", component:MenuComponent, children:[
         { path:"productmanager", component:ProductManagerComponent, pathMatch:'full' },
         { path:"usermanager", component:UserManagerComponent, pathMatch:'full' },
+        { path:"newproduct", component:NewProductComponent, pathMatch:'full' },
+        { path:"editproduct/:id", component:EditProductComponent, pathMatch:'full' },
         { path:'', redirectTo:'productmanager', pathMatch:'full'}
     ]},
     { path:'', redirectTo:'productmanager', pathMatch:'full' }
